@@ -32,7 +32,7 @@ namespace proyectoprogramado
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Juliana, LA AMOOOOOOOOOOOOOO! :3");
+                    await context.Response.WriteAsync("Vamos a pasar espe!");
                 });
             });
         }

@@ -14,7 +14,7 @@ namespace proyectoprogramado.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Hola", "Mundo" };
+            return new string[] { "Initial", "Hello" };
         }
 
         [HttpPost("{id}/{pass}")]

@@ -27,14 +27,31 @@ namespace proyectoprogramado.Controllers
             return result; 
         }
 
-        public IActionResult Login([FromQuery(Name = "id")] string id, 
-                                   [FromQuery(Name = "password")] string password)
+        [HttpPost]
+        public IActionResult Login(string id, string password)
         {
+            TempData["id"] = id;
+            TempData["password"] = password;
             bool result = login_access(id, password);
             if(result == true)
-                @ViewData["result"] = "success";
+                return RedirectToAction("Perfil", "Login");
             else
-                @ViewData["result"] = "fail";
+                return RedirectToAction("Login", "Login");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Perfil()
+        {
+            string param1 = TempData["id"].ToString();
+            string param2 = TempData["password"].ToString();
+            TempData["param1"] = param1;
+            TempData["param2"] = param2;
             return View();
         }
 

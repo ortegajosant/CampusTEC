@@ -34,7 +34,7 @@ namespace proyectoprogramado.Controllers
             TempData["password"] = password;
             bool result = login_access(id, password);
             if(result == true)
-                return RedirectToAction("Perfil", "Login");
+                return RedirectToAction("Profile", "Info");
             else
                 return RedirectToAction("Login", "Login");
         }
@@ -44,16 +44,5 @@ namespace proyectoprogramado.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult Perfil()
-        {
-            string param1 = TempData["id"].ToString();
-            string param2 = TempData["password"].ToString();
-            TempData["param1"] = param1;
-            TempData["param2"] = param2;
-            return View();
-        }
-
     }
 }

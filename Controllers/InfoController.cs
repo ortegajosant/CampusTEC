@@ -9,8 +9,7 @@ using proyectoprogramado.Models;
 namespace proyectoprogramado.Controllers
 {
     public class InfoController : Controller
-    {
-
+    {               
         private InfoModel info;
 
         [HttpGet]
@@ -22,6 +21,6 @@ namespace proyectoprogramado.Controllers
             else
                 this.info.update(id);
             return View(this.info);
-        }
+        }        
     }
 }

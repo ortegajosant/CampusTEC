@@ -4,34 +4,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using proyectoprogramado.Models;
 
 namespace proyectoprogramado.Controllers
 {
-    [ApiController]
-    [Route("campustec/login")]
     public class LoginController : Controller
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Initial", "Hello" };
+
+        private LoginModel model;
+
+        public LoginController (){
+            LoginModel model = new LoginModel();
+            this.set_model(model);
         }
 
-        [HttpPost("{id}/{pass}")]
-        public IEnumerable<string> Post(int id, string pass)
-        {
-            if (id == 0){
-                return new string[] { id.ToString() , pass };
-            }
-            else{
-                return new string[] {"You are my friend aahhhh"};
-            }
-            
+        public void set_model(LoginModel model){
+            this.model = model;
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id){
-            return "value";
+        public bool login_access(string id, string password){
+            bool result = model.check_user(id, password);
+            return result; 
         }
+
+        public IActionResult Login([FromQuery(Name = "id")] string id, 
+                                   [FromQuery(Name = "password")] string password)
+        {
+            bool result = login_access(id, password);
+            if(result == true)
+                @ViewData["result"] = "success";
+            else
+                @ViewData["result"] = "fail";
+            return View();
+        }
+
     }
 }

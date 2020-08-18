@@ -1,6 +1,6 @@
 using System;
 
-namespace proyectoprogramado
+namespace proyectoprogramado.DBTables
 {
     public class User
     {

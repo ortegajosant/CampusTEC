@@ -24,5 +24,10 @@ namespace proyectoprogramado.DBTables
             get;
             set;
         }
+        public DbSet<Student> Student
+        {
+            get;
+            set;
+        }
     }
 }

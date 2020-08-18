@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using proyectoprogramado.Models;
+using proyectoprogramado.DBTables;
 
 namespace proyectoprogramado.Controllers
 {
@@ -18,8 +19,16 @@ namespace proyectoprogramado.Controllers
         [HttpPost]
         public string insert_user()
         {
-            string answer = db.insert_user("{'name':'TestName', 'lastname': 'TestLast', 'identifier':'11119999', 'pin': '1234','role':'E'}");
+            string answer = db.insert_student(@"{'name':'TestStudent', 'lastname': 'TestStudent', 'identifier':'12345678', 'pin': '1234','role':'E',
+                                            'universidad':'X-TEC', 'sede':'Central', 'email1':'student@test.test', 'email2': 'student2@test.test',
+                                            'mobilePhone':'21123223', 'amountOfTec_colones':500}");
             return answer;
         }
+
+        [HttpGet("id")]
+        public string getStudent(string id){
+            return db.getStudent("{'id':1}");
+        }
+
     }
 }

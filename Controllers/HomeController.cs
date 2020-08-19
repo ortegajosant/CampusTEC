@@ -20,7 +20,7 @@ namespace proyectoprogramado.Controllers
 
         public IActionResult Index()
         {
-            return View();
+             return RedirectToAction("Login","Login");
         }
 
         public IActionResult Privacy()

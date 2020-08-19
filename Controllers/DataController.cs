@@ -25,10 +25,10 @@ namespace proyectoprogramado.Controllers
             return answer;
         }
 
-        [HttpGet("{id}")]
-        public string getStudent(string id){
-            return db.getStudent("{'id':1}");
-        }
+        // [HttpGet("{id}")]
+        // public string[] getStudent(string id){
+        //     return db.getStudent("2");
+        // }
 
     }
 }

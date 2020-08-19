@@ -60,27 +60,34 @@ namespace proyectoprogramado.Models
             return confirm_insert();
         }
 
-        public string getStudent(string request)
+        public string[] getStudent(string id)
         {
-            JObject request_json = JObject.Parse(request);
-            int id_s = Int32.Parse(request_json["id"].ToString());
-
             var studne = from s in context.Student
                          join u in context.User on s.idUser equals u.id
-                         where s.id == id_s
+                         where u.identifier == id
                          select new
                          {
                              name = u.name,
                              lastname = u.lastName,
-                             identifier = u.identifier,
                              email1 = s.email1,
                              email2 = s.email2,
                              phone = s.mobilePhone,
                              campus = s.sede,
                              tecColones = s.amountOfTec_colones
                          };
-
-            return studne.First().ToString().Replace("=", ":");
+            //studne.First().ToString().Replace("=", ":")
+            string[] result = new string[7];
+            foreach (var item in studne)
+            {
+                result[0] = item.name;
+                result[1] = item.lastname;
+                result[2] = item.campus;
+                result[3] = item.phone;
+                result[4] = item.email1;
+                result[5] = item.email2;
+                result[6] = item.tecColones.ToString();
+            }
+            return result;
         }
 
         public bool getAccess(string id, string password)

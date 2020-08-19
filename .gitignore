@@ -16,6 +16,7 @@ obj/
 # Edit at https://www.toptal.com/developers/gitignore?templates=code
 
 ### Code ###
+.ionide/
 .vscode/
 !.vscode/settings.json
 !.vscode/tasks.json

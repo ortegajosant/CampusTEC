@@ -6,12 +6,13 @@ using Newtonsoft.Json.Linq;
 using proyectoprogramado.DBTables;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace proyectoprogramado.Models
 {
     public class DataModel
     {
-        private DBCampusContext context;
+        private readonly DBCampusContext context;
 
         public DataModel(DBCampusContext contextDB)
         {
@@ -59,6 +60,44 @@ namespace proyectoprogramado.Models
             return confirm_insert();
         }
 
+        public string getStudent(string request)
+        {
+            JObject request_json = JObject.Parse(request);
+            int id_s = Int32.Parse(request_json["id"].ToString());
+
+            var studne = from s in context.Student
+                         join u in context.User on s.idUser equals u.id
+                         where s.id == id_s
+                         select new
+                         {
+                             name = u.name,
+                             lastname = u.lastName,
+                             identifier = u.identifier,
+                             email1 = s.email1,
+                             email2 = s.email2,
+                             phone = s.mobilePhone,
+                             campus = s.sede,
+                             tecColones = s.amountOfTec_colones
+                         };
+
+            return studne.First().ToString().Replace("=", ":");
+        }
+
+        public bool getAccess(string id, string password)
+        {
+
+            var user = from s in context.User
+                       where s.identifier == id
+                       && s.pin == password
+                       select s;
+
+            if (user.Any())
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         private string confirm_insert()
         {
